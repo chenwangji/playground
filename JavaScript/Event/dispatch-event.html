@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div><button>click</button></div>
+</body>
+<script>
+  var ev = new Event('look', {
+    bubbles: true, // 是否冒泡，默认为 false
+    cancelable: false // 是否可以取消，默认为 false。
+  })
+
+  const button = document.querySelector('button')
+  button.addEventListener('look', () => { console.log('look') })
+  // 主动触发事件
+  button.dispatchEvent(ev)
+
+  const p = document.querySelector('div')
+  const click = new Event('click')
+  button.addEventListener('click', (e) => console.log(e))
+  p.addEventListener('click', (e) => console.log(e.currentTarget.tagName)) 
+
+  button.dispatchEvent(click) // p 绑定的事件不会触发
+</script>
+</html>
