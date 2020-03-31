@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <canvas></canvas>
+  <script>
+    const canvas = document.querySelector('canvas')
+    const context = canvas.getContext('2d')
+
+    const img = new Image()
+    img.crossOrigin = 'anonymous'
+    // // 或者
+    // img.crossOrigin = ''
+    // // 或者
+    // img.crossOrigin = 'abc'
+    // 会被解释成 anonymous
+
+    // 除了
+    // img.crossOrigin = 'use-credentials' // 需要凭证，会有跨域
+    img.onload = function() {
+      context.drawImage(this, 0, 0)
+      // context.getImageData(0, 0, this.width, this.height)
+      const url = canvas.toDataURL()
+      console.log(url) // base64
+    }
+
+    img.src = 'https://avatars0.githubusercontent.com/u/23144765?s=60&u=eaba5119f6686b1dd7bcb5c120ac4c6843d57cc9&v=4' 
+
+    // chrome 跨域报错
+    // Uncaught DOMException: Failed to execute 'getImageData' on 'CanvasRenderingContext2D': The canvas has been tainted by cross-origin data.
+  </script>
+</body>
+</html>
