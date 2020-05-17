@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>unload 事件</title>
+</head>
+<body>
+  <script>
+    let analyticsData = {
+      viewed: 2
+    }
+    window.addEventListener('unload', function() {
+      alert('check if can be interupted')
+      navigator.sendBeacon('/analytics', JSON.stringify(analyticsData))
+    })
+  </script>
+</body>
+</html>

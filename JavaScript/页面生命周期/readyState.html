@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>readyStateChange 事件</title>
+</head>
+<body>
+  <script>
+    // document.readyState 的三个状态:
+    // loading: 文档正在被加载
+    // interactive: 文档被全部读取
+    // complete: 文档被全部读取，并且所有资源（图片等）都已经加载完成。
+    
+    // readystatechange 事件会在这些 document.readyState 改变时触发
+
+    // 以下打印顺序
+    // [1] initial readyState:loading
+    // [2] readyState:interactive
+    // [2] DOMContentLoaded
+    // [3] iframe onload
+    // [4] img onload
+    // [4] readyState:complete
+    // [4] window onload
+    console.log('initial readyState:', document.readyState);
+    document.addEventListener('readystatechange', () => console.log('readyState: ', document.readyState))
+    document.addEventListener('DOMContentLoaded', () => console.log('DOMContentLoaded'))
+    window.onload = () => console.log('window load')
+    
+  </script> 
+
+  <iframe src="https://baidu.com" frameborder="0" onload="console.log('iframe load')"></iframe>
+  <img src="http://en.js.cx/clipart/train.gif" id="img">
+
+  <script>
+    img.onload = () => console.log('img load');
+  </script>
+</body>
+</html>

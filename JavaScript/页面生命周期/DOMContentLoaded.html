@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOMContentLoaded 事件</title>
+</head>
+<body>
+  <script>
+    // DOMContentLoaded 事件在一般情况下会在 dom 树准备就绪后触发，而不会等外部资源如图片，css 加载完成后才触发
+    document.addEventListener('DOMContentLoaded', alertImgSize)
+
+    // onload
+    window.onload = function() {
+      alertImgSize()
+    }
+
+    function alertImgSize() {
+      alert(`Image size: ${img.offsetWidth} x ${img.offsetHeight}`)
+    }
+  </script>
+  <script>
+    // other script
+    alert('execute first')
+  </script>
+  <img id="img" src="https://en.js.cx/clipart/train.gif?speed=1&cache=0">
+</body>
+</html>

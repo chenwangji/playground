@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>beforeunload 事件</title>
+</head>
+<body>
+  <script>
+    window.addEventListener('beforeunload', function(e) {
+      // 为何我这里不会触发弹窗
+      var confirmationMessage = "sure";
+      console.log(confirmationMessage)
+
+      (e || window.event).returnValue = confirmationMessage;     // Gecko and Trident
+      return 'fff'; // Gecko and WebKit
+    })
+  </script>
+  <input type="text">
+</body>
+</html>
